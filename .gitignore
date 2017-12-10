@@ -1,6 +1,7 @@
 superlists/__pycache__/
 *.pyc
 chromedriver.exe
+geckodriver.exe
 .gitignore
 debug.log
 db.sqlite3
