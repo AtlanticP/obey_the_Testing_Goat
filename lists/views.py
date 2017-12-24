@@ -3,12 +3,7 @@ from .models import Item
 from django.http import HttpResponse
 
 def home_page(request):
-	if request.method == 'POST':
-		new_item_text = request.POST['item_text']
-		Item.objects.create(text=new_item_text)
-		return redirect('/lists/the-only-list-in-the-world/')				
-		
-
+	
 	return render(request, 'home.html')
 
 def list_view(request):
@@ -16,5 +11,7 @@ def list_view(request):
 
 	return render(request, 'list.html', {'items': items})
 
-def asd(request):
-	pass
+def new_list(request):
+    Item.objects.create(text=request.POST['item_text'])
+    
+    return redirect('/lists/the-only-list-in-the-world/')
