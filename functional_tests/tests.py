@@ -5,8 +5,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
 
-print('\nNewVisitorTest')
-
 class NewVisitorTest(LiveServerTestCase):
     
 
@@ -67,8 +65,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertRegex(edith_list_url, '/lists/.+')
         # Satisfied, she goes back to sleep
 
-        print(edith_list_url)
-      
+    
         # Now a new user, Francis, comes along to the site.
 
         ## We use a new browser session to make sure that no information
