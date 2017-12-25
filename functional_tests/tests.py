@@ -66,6 +66,8 @@ class NewVisitorTest(LiveServerTestCase):
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
         # Satisfied, she goes back to sleep
+
+        print(edith_list_url)
       
         # Now a new user, Francis, comes along to the site.
 
