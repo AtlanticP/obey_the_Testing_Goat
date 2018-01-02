@@ -1,5 +1,5 @@
 from django.test import LiveServerTestCase
-
+import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
@@ -11,6 +11,9 @@ class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):  
         self.browser = webdriver.Firefox()
+        # staging_server = os.environ.get('STAGING_SERVER')
+        # if staging_server:
+        #     self.live_server_url = 'http://' + staging_server
     
     def tearDown(self):  
         self.browser.quit()
@@ -22,7 +25,6 @@ class NewVisitorTest(LiveServerTestCase):
         
         while True:
             try:
-
                 table = self.browser.find_element_by_id('id_list_table')
                 rows = table.find_elements_by_tag_name('tr')
                 self.assertIn(row_text, [row.text for row in rows])
@@ -38,7 +40,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         self.browser.get(self.live_server_url)
 
-        self.assertIn('To-Do', self.browser.title)
+        self.assertIn('Home page', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text  
         self.assertIn('To-Do', header_text)
 
@@ -52,19 +54,17 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)  
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
 
-
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Use peacock feathers to make a fly')  
         inputbox.send_keys(Keys.ENTER)  
         
         # The page updates again, and now shows both items on her list
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
-        self.browser.get(self.live_server_url)
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
        
         # She notices that her list has a unique URL
         inputbox = self.browser.find_element_by_id('id_new_item')
-        print(edith_list_url)
+        edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/list/.+')
         # Satisfied, she goes back to sleep
 

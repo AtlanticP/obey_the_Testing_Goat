@@ -66,7 +66,7 @@ class AddItemTest(TestCase):
     def test_can_save_a_POST_request(self):
 
        lst = List.objects.create()        
-       response = self.client.post(f'/list/{lst.id}/add_item', data={'item_text': 'A new list item'})
+       response = self.client.post(f'/list/{lst.id}/add_item/', data={'item_text': 'A new list item'})
 
        self.assertEqual(Item.objects.count(), 1)
 
@@ -75,7 +75,7 @@ class AddItemTest(TestCase):
 
     def test_redirects_after_post_request_adding_item(self):
        lst = List.objects.create()
-       response = self.client.post(f'/list/{lst.id}/add_item', data={'item_text': 'A new list item'})
+       response = self.client.post(f'/list/{lst.id}/add_item/', data={'item_text': 'A new list item'})
        
        self.assertRedirects(response, f'/list/{lst.id}/')
 
