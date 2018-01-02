@@ -17,11 +17,12 @@ class NewVisitorTest(LiveServerTestCase):
 
     def wait_for_row_in_list_table(self, row_text):
         
-        MAX_WAIT = 2
+        MAX_WAIT = 3
         start_time = time.time()
         
         while True:
             try:
+
                 table = self.browser.find_element_by_id('id_list_table')
                 rows = table.find_elements_by_tag_name('tr')
                 self.assertIn(row_text, [row.text for row in rows])
@@ -58,11 +59,13 @@ class NewVisitorTest(LiveServerTestCase):
         
         # The page updates again, and now shows both items on her list
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.browser.get(self.live_server_url)
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
        
         # She notices that her list has a unique URL
-        edith_list_url = self.browser.current_url
-        self.assertRegex(edith_list_url, '/lists/.+')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        print(edith_list_url)
+        self.assertRegex(edith_list_url, '/list/.+')
         # Satisfied, she goes back to sleep
 
     
@@ -90,7 +93,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # Francis gets his own unique URL
         francis_list_url = self.browser.current_url
-        self.assertRegex(francis_list_url, '/lists/.+')
+        self.assertRegex(francis_list_url, '/list/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
 
         # Again, there is no trace of Edith's list
@@ -113,4 +116,4 @@ class NewVisitorTest(LiveServerTestCase):
 
         # She notices that her list has a unique URL
         edith_list_url = self.browser.current_url
-        self.assertRegex(edith_list_url, '/lists/.+')
+        self.assertRegex(edith_list_url, '/list/.+')
