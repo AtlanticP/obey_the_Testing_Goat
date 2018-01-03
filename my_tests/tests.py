@@ -17,4 +17,4 @@ class MyTest(LiveServerTestCase):
 
 		self.browser.get(self.live_server_url)
 
-		self.assertIn('To-Do', self.browser.title)
+		self.assertIn('Home page', self.browser.title)

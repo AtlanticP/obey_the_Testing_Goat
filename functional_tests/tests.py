@@ -96,6 +96,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertRegex(francis_list_url, '/list/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
 
+        time.sleep(3)
         # Again, there is no trace of Edith's list
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
