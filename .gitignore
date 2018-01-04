@@ -6,3 +6,5 @@ geckodriver.exe
 debug.log
 db.sqlite3
 geckodriver.log
+asd.py
+/static/*
