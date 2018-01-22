@@ -1,9 +1,9 @@
-from django.test import LiveServerTestCase
+import time
 import os
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
-import time
 
 class NewVisitorTest(LiveServerTestCase):
     
@@ -11,9 +11,9 @@ class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):  
         self.browser = webdriver.Firefox()
-        # staging_server = os.environ.get('STAGING_SERVER')
-        # if staging_server:
-        #     self.live_server_url = 'http://' + staging_server
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
     
     def tearDown(self):  
         self.browser.quit()
@@ -118,3 +118,5 @@ class NewVisitorTest(LiveServerTestCase):
         # She notices that her list has a unique URL
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/list/.+')
+
+        
