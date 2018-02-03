@@ -5,15 +5,22 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 
+from selenium.webdriver.firefox.options import Options
+
 class NewVisitorTest(LiveServerTestCase):
     
 
 
     def setUp(self):  
-        self.browser = webdriver.Firefox()
+        
+        options = Options()
+        options.add_argument('--headless')
+        self.browser = webdriver.Firefox(firefox_options=options) #, executable_path='~/django/sites/geckodriver')
+        print(' Firefox Headless Browser Invoked')
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
+            print(self.live_server_url)
     
     def tearDown(self):  
         self.browser.quit()
@@ -75,7 +82,9 @@ class NewVisitorTest(LiveServerTestCase):
         ## of Edith's is coming through from cookies etc
         self.browser.quit()
        
-        self.browser = webdriver.Firefox()
+        options = Options()
+        options.add_argument('--headless')
+        self.browser = webdriver.Firefox(firefox_options=options)
          
          # Francis visits the home page.  There is no sign of Edith's
         # list
