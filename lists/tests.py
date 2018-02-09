@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.exceptions import ValidationError
 from .models import List, Item
 
 class HomePageTest(TestCase):
@@ -9,6 +10,14 @@ class HomePageTest(TestCase):
 
 class ItemAndListModelsTest(TestCase):
 
+  def test_cannot_save_empty_list_items(self):
+    list_ = List.objects.create()
+    item = Item(list=list_, text = '')
+    with self.assertRaises(ValidationError):
+      item.save()
+      item.full_clean()
+
+    
     def test_saves_and_retrieves_data_from_db(self):
 
         lst = List.objects.create()
@@ -82,3 +91,4 @@ class AddItemTest(TestCase):
       
 
         
+

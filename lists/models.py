@@ -4,7 +4,7 @@ class List(models.Model):
 	pass
 
 class Item(models.Model):
-	text = models.TextField(default='')
+	text = models.TextField(default='', blank=False)
 	list = models.ForeignKey('List', on_delete=models.CASCADE)
 
 
