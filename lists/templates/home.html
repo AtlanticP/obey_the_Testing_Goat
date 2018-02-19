@@ -2,4 +2,4 @@
 
 {% block title %}Home page{% endblock %}
 {% block header %}Your To-Do list{% endblock %}
-{% block form_action %}'/list/new/'{% endblock %}
+{% block form_action %}{% url 'new_list' %}{% endblock %}
