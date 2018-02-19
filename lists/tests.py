@@ -31,16 +31,21 @@ class ItemAndListModelsTest(TestCase):
         self.assertEqual(saved_items[0].text, 'Item one')
         self.assertEqual(saved_items[1].text, 'Item two')
 
-class ListView(TestCase):
+class ListViewTest(TestCase):
 
     def test_uses_list_template(self):
-
         lst = List.objects.create()
         response = self.client.get(f'/list/{lst.id}/')
         
         self.assertTemplateUsed(response, 'list.html')
 
-    def test_displays_items_from_correct_list(self):
+    def test_passes_correct_list_to_template(self):
+        other_list = List.objects.create()
+        correct_list = List.objects.create()
+        response = self.client.get(f'/list/{correct_list.id}/')
+        self.assertEqual(response.context['list'], correct_list)
+
+    def test_displays_only_items_from_that_list(self):
        
        correct_list = List.objects.create()
        other_list = List.objects.create()
@@ -51,7 +56,31 @@ class ListView(TestCase):
 
        self.assertContains(response, 'Item one')
        self.assertContains(response, 'Item two')
-        
+
+    def test_can_save_a_POST_request_to_an_existing_list(self):
+        other_list = List.objects.create()
+        correct_list = List.objects.create()
+
+        response = self.client.post(
+            f'/list/{correct_list.id}/',
+            data = {'item_text': 'A new item for an existing list'}
+        )
+
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'A new item for an existing list')
+        self.assertEqual(new_item.list, correct_list)
+
+    def test_POST_redirects_to_list_view(self):
+        other_list = List.objects.create()
+        correct_list = List.objects.create()
+
+        response = self.client.post(
+                f'/list/{correct_list.id}/',
+                data = {'item_text': 'A new item for an existing list'}
+        )
+
+        self.assertRedirects(response, f'/list/{correct_list.id}/')
 
 class NewItemTest(TestCase):
 
@@ -103,3 +132,7 @@ class NewListTest(TestCase):
     self.client.post('/list/new/', data={'item_text': ''})
     self.assertEqual(List.objects.count(), 0)
     self.assertEqual(Item.objects.count(), 0)
+
+
+
+

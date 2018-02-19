@@ -14,7 +14,6 @@ class FucntionalTest(LiveServerTestCase):
         options = Options()
         options.add_argument('--headless')
         self.browser = webdriver.Firefox(firefox_options=options) 
-        print(' Firefox Headless Browser Invoked')
         staging_server = os.environ.get('STAGING_SERVER')
         
         if staging_server:
