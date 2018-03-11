@@ -9,3 +9,4 @@ geckodriver.log
 asd.py
 /static/*
 /venv/*
+/geckodriver/
