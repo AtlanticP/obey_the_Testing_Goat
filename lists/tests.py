@@ -9,6 +9,11 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        # import pdb; pdb.set_trace()
+        self.assertIsInstance(response.context['form'], ItemForm)
+        
 class ItemAndListModelsTest(TestCase):
 
   def test_cannot_save_empty_list_items(self):
@@ -147,3 +152,4 @@ class ItemFormTest(TestCase):
             form.errors['text'],
             [EMPTY_ITEM_ERROR],
         )
+

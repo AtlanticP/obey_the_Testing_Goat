@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Item, List
 from django.core.exceptions import ValidationError
-# from superlists.settings import BASE_DIR, STATICFILES_DIR
+from lists.forms import ItemForm
 
 
 
 def home_page(request):
-	return render(request, 'home.html')
+	return render(request, 'home.html', {'form': ItemForm()})
 
 def list_view(request, list_id):
 	
