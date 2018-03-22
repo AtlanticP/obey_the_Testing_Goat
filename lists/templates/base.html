@@ -1,25 +1,47 @@
+{% load static %}
 <html>
     <head>
          <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <!-- Bootstrap CSS, my_style -->
+        <link rel="stylesheet" type="text/css" href="{% static 'lists/bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="<link rel="stylesheet" type="text/css" href="{% static 'lists/style.css' %}">
 
         <title>{% block title %}{% endblock %}</title>
+ 
     </head>
     <body>
         <h1>{% block header %}{% endblock %}</h1>
 	    <form method="post" action={% block form_action %}{% endblock %}>
 	    	{% csrf_token %}
-		    <input name='item_text' id="id_new_item" placeholder="Enter a to-do item" />
+		    <input name='item_text' id="id_new_item" placeholder="Enter a to-do item" class="form-control input-lg"/>
 		</form>
+        {% if error %}
+            <div class="form-group has-error">
+                <span class="help-block">{{ error }}</span>
+            </div>
+        {% endif %}
+
         {% block table %}
         {% endblock %}
 
             <!-- Optional JavaScript -->
-        
+ 
+         <img src="{% static 'lists/1.jpg' %}">
+
+
+
+
+
+
+
+
+
+
+
+ 
         
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
