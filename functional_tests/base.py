@@ -4,17 +4,16 @@ from selenium import webdriver
 import os
 from selenium.common.exceptions import WebDriverException
 import time
+
 MAX_WAIT = 3
 
 class FucntionalTest(LiveServerTestCase):
-
 
     def setUp(self):  
         
         options = Options()
         options.add_argument('--headless')
         self.browser = webdriver.Firefox(firefox_options=options) 
-        print(' Firefox Headless Browser Invoked')
         staging_server = os.environ.get('STAGING_SERVER')
         
         if staging_server:
