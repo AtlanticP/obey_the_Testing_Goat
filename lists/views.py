@@ -7,7 +7,14 @@ def home_page(request):
 	return render(request, 'home.html')
 
 def list_view(request, list_id):
+	
 	lst = List.objects.get(pk=list_id)
+
+	if request.method == 'POST':
+
+		item = Item.objects.create(list=lst, text=request.POST['item_text'])
+
+		return redirect(f'/list/{lst.id}/')
 
 	return render(request, 'list.html', {'list': lst})
 
