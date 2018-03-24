@@ -19,7 +19,7 @@ def new_list(request):
 		return render(request, 'home.html', {'error': error})
 
 	item.save()
-	return redirect(f'/list/{lst.id}/')
+	return redirect(lst)
 
 def list_view(request, list_id):
 	
@@ -36,7 +36,7 @@ def list_view(request, list_id):
 			return render(request, 'list.html', {'list': lst, 'error': error})
 
 		item.save()	
-		return redirect(f'/list/{lst.id}/')
+		return redirect(lst)
 
 	return render(request, 'list.html', {'list': lst})
 
@@ -52,4 +52,4 @@ def add_item(request, list_id):
 		error = "You can't have an empty list item"
 		return render(request, 'list.html', {'list':lst, 'error':error})
 	item.save()
-	return redirect(f'/list/{list_id}/')
+	return redirect(lst)
