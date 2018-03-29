@@ -16,13 +16,13 @@
         <h1>{% block header %}{% endblock %}</h1>
 	    <form method="post" action={% block form_action %}{% endblock %}>
 	    	{% csrf_token %}
-		    <input name='item_text' id="id_new_item" placeholder="Enter a to-do item" class="form-control input-lg"/>
-		</form>
+		    {{ form.text }}
         {% if error %}
             <div class="form-group has-error">
                 <span class="help-block">{{ error }}</span>
             </div>
         {% endif %}
+		</form>
 
         {% block table %}
         {% endblock %}
@@ -31,17 +31,6 @@
  
          <img src="{% static 'lists/1.jpg' %}">
 
-
-
-
-
-
-
-
-
-
-
- 
         
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
