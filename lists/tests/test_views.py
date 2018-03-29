@@ -41,7 +41,7 @@ class ListView(TestCase):
       inc_lst = List.objects.create()
 
       self.client.post(f'/list/{lst.id}/', data = {
-        'item_text': "A new item for an existing list"
+        'text': "A new item for an existing list"
         })
 
       self.assertEqual(Item.objects.count(), 1)
@@ -60,7 +60,7 @@ class ListView(TestCase):
       inc_lst = List.objects.create()
 
       response = self.client.post(f'/list/{lst.id}/', data = {
-        'item_text': "A new item for an existing list"
+        'text': "A new item for an existing list"
         })
 
       self.assertRedirects(response, f'/list/{lst.id}/')
@@ -70,7 +70,7 @@ class ListView(TestCase):
 
       lst = List.objects.create()
 
-      response = self.client.post(f'/list/{lst.id}/', data={'item_text': ''})
+      response = self.client.post(f'/list/{lst.id}/', data={'text': ''})
 
       self.assertEqual(response.status_code, 200)
       self.assertTemplateUsed(response, 'list.html')
@@ -83,7 +83,7 @@ class AddItemTest(TestCase):
     def test_can_save_a_POST_request(self):
 
        lst = List.objects.create()        
-       response = self.client.post(f'/list/{lst.id}/', data={'item_text': 'A new list item'})
+       response = self.client.post(f'/list/{lst.id}/', data={'text': 'A new list item'})
 
        self.assertEqual(Item.objects.count(), 1)
 
@@ -92,7 +92,7 @@ class AddItemTest(TestCase):
 
     def test_redirects_after_post_request_adding_item(self):
        lst = List.objects.create()
-       response = self.client.post(f'/list/{lst.id}/', data={'item_text': 'A new list item'})
+       response = self.client.post(f'/list/{lst.id}/', data={'text': 'A new list item'})
        
        self.assertRedirects(response, f'/list/{lst.id}/')
 
@@ -100,7 +100,7 @@ class AddItemTest(TestCase):
 class NewItemTest(TestCase):
 
     def test_can_save_a_POST_request(self):
-        response = self.client.post('/list/new/', data={'item_text': 'A new list item'})
+        response = self.client.post('/list/new/', data={'text': 'A new list item'})
 
         self.assertEqual(Item.objects.count(), 1)
 
@@ -109,7 +109,7 @@ class NewItemTest(TestCase):
         self.assertRedirects(response, f'/list/{new_item.id}/')
 
     def test_redirects_to_list_view(self):
-        response = self.client.post('/list/new/', data={'item_text': 'A new list item'})
+        response = self.client.post('/list/new/', data={'text': 'A new list item'})
 
         lst = List.objects.first()
 
@@ -120,7 +120,7 @@ class NewListTest(TestCase):
 
   def test_validation_errors_are_sent_back_to_home_page_template(self):
 
-    response = self.client.post(f'/list/new/', data={'item_text': ''})
+    response = self.client.post(f'/list/new/', data={'text': ''})
 
     self.assertEqual(response.status_code, 200)
     self.assertTemplateUsed(response, 'home.html')
@@ -131,7 +131,7 @@ class NewListTest(TestCase):
 
   def test_invalid_test_items_are_not_saved_in_db(self):
 
-    response = self.client.post(f'/list/new/', data={'item_text': ''})
+    response = self.client.post(f'/list/new/', data={'text': ''})
 
     self.assertEqual(List.objects.count(), 0)
     self.assertEqual(Item.objects.count(), 0)    
