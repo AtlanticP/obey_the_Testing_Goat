@@ -3,6 +3,8 @@ from .models import Item, List
 from django.core.exceptions import ValidationError
 from lists.forms import ItemForm
 
+form = ItemForm()
+
 def home_page(request):
 	return render(request, 'home.html', {'form': ItemForm()})
 
@@ -38,5 +40,5 @@ def list_view(request, list_id):
 		item.save()	
 		return redirect(lst)
 
-	return render(request, 'list.html', {'form': form})
+	return render(request, 'list.html', {'list': lst, 'form': form})
 
