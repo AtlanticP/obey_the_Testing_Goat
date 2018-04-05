@@ -6,39 +6,27 @@ from lists.forms import ItemForm
 form = ItemForm()
 
 def home_page(request):
-	return render(request, 'home.html', {'form': ItemForm()})
+  return render(request, 'home.html', {'form': ItemForm()})
 
 def new_list(request):
 
-	lst = List.objects.create()
-	item = Item(list=lst, text=request.POST['text'])	
+  if request.method == 'POST':
+    form = ItemForm(data=request.POST)
 
-	try:
-		item.full_clean()
-	except ValidationError:
-		lst.delete()
-		error = "You can't have an empty list item"
-		return render(request, 'home.html', {'error': error})
-
-	item.save()
-	return redirect(lst)
+    if form.is_valid():
+      lst = List.objects.create()
+      Item.objects.create(text=request.POST['text'], list=lst)
+      return redirect(lst)
+  return render(request, 'home.html', {'form': form})
 
 def list_view(request, list_id):
-	
-	lst = List.objects.get(pk=list_id)
-
-	if request.method == 'POST':
-
-		item = Item.objects.create(list=lst, text=request.POST['text'])
-
-		try:
-			item.full_clean()
-		except ValidationError:
-			error = "You can't have an empty list item"
-			return render(request, 'list.html', {'list': lst, 'error': error})
-
-		item.save()	
-		return redirect(lst)
-
-	return render(request, 'list.html', {'list': lst, 'form': form})
+  lst = List.objects.get(pk=list_id)
+  form = ItemForm()
+  # import pdb; pdb.set_trace()
+  if request.method == 'POST':
+    form = ItemForm(data=request.POST)
+    if form.is_valid():
+      Item.objects.create(text=request.POST['text'], list=lst)
+      return redirect(lst)
+  return render(request, 'list.html', {'list': lst, 'form': form})
 
