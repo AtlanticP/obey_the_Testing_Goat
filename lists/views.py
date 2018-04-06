@@ -9,7 +9,6 @@ def home_page(request):
 def new_list(request):
   form = ItemForm(data=request.POST)
   
-  import pdb; pdb.set_trace()
   if form.is_valid():
     lst = List.objects.create()
     Item.objects.create(text=request.POST['item_text'], list = lst)
