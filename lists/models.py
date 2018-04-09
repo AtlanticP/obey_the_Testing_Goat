@@ -17,3 +17,4 @@ class Item(models.Model):
 		unique_together = ('list', 'text')
 		ordering = ('id',)
 
+
