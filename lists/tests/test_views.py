@@ -81,6 +81,20 @@ class ListViewTest(TestCase):
     response = self.post_invalid_input()
     self.assertContains(response, escape(EMPTY_ITEM_ERROR))
 
+  @skip
+  def test_duplicate_item_validation_errors_end_up_on_lists_page(self):
+    lst1 = List.objects.create()
+    item1 = Item.objects.create(list=lst1, text='textey')
+    response = self.client.post(
+      f'/list/{lst1.id}/',
+      data={'text': 'textey'}
+    )
+
+    expected_error = escape("You've already got this in your list")
+    self.assertContains(response, expected_error)
+    self.assertTemplateUsed(response, 'list.html')
+    self.assertEqual(Item.objects.all().count(), 1)
+
 
 class AddItemTest(TestCase):
 
@@ -141,3 +155,4 @@ class NewListTest(TestCase):
     def post_invalid_input(self):
       lst = List.objects.create()
       return self.client.post(f'/list/{lst.id}/', data={'text': ''})
+
