@@ -7,9 +7,9 @@ from lists.models import Item, List
 
 class MyTest(TestCase):
 
-  def test_invalid_test_items_are_not_saved_in_db(self):
-
-    response = self.client.post(f'/list/new/', data={'text': ''})
-
-    self.assertEqual(List.objects.count(), 0)
-    self.assertEqual(Item.objects.count(), 0) 
+  def test_displays_item_form(self):
+    lst = List.objects.create()
+    response = self.client.get(f'/lists/{lst.id}/')
+    import pdb; pdb.set_trace()
+    self.assertIsInstance(response.context['form'], ExistingListItemForm)
+    self.assertContains(response, 'name="text"')

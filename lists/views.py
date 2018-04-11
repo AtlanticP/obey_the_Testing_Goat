@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Item, List
 from django.core.exceptions import ValidationError
-from lists.forms import ItemForm
+from lists.forms import ItemForm, ExistingListItemForm
 
 form = ItemForm()
 
@@ -21,10 +21,9 @@ def new_list(request):
 
 def list_view(request, list_id):
   lst = List.objects.get(pk=list_id)
-  form = ItemForm()
-  # import pdb; pdb.set_trace()
+  form = ExistingListItemForm(for_list=lst)
   if request.method == 'POST':
-    form = ItemForm(data=request.POST)
+    form = ExistingListItemForm(data=request.POST, for_list=lst)
     if form.is_valid():
       form.save(for_list=lst)
       return redirect(lst)
