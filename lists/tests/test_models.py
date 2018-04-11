@@ -27,6 +27,8 @@ class ItemModelsTest(TestCase):
     item = Item(list=lst2, text='bla')
     item.full_clean() # should not raise
 
+  # I do not understand the meaning of that test 
+  # (15. More advanced forms )
   def test_default_text(self):
     item = Item()
     self.assertEqual(item.text, '')

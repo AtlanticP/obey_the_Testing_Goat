@@ -142,7 +142,6 @@ class NewListTest(TestCase):
 
     expected_error = escape(EMPTY_ITEM_ERROR)
     self.assertContains(response, expected_error)
-      
 
   def test_invalid_test_items_are_not_saved_in_db(self):
 
