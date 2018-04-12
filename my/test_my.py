@@ -7,9 +7,9 @@ from lists.models import Item, List
 
 class MyTest(TestCase):
 
+	@skip
   def test_displays_item_form(self):
     lst = List.objects.create()
     response = self.client.get(f'/lists/{lst.id}/')
-    import pdb; pdb.set_trace()
     self.assertIsInstance(response.context['form'], ExistingListItemForm)
     self.assertContains(response, 'name="text"')

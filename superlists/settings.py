@@ -130,7 +130,7 @@ STATICFILES_DIR = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'lists')
-# import pdb; pdb.set_trace()
+
 
 
 
