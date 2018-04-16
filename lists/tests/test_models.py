@@ -46,25 +46,7 @@ class ListModelsTest(TestCase):
     self.assertEqual(lst.get_absolute_url(), f'/list/{lst.id}/')
 
 
-  def test_error_messages_are_cleared_on_input(self):
-    self.browser.get(self.live_server_url)
-    self.get_item_input_box().send_keys('Banter too thick')
-    self.get_item_input_box().send_keys(Keys.ENTER)
-    self.wait_for_row_in_list_table('1: Banter too thick')
-    self.get_item_input_box().send_keys('Banter too thick')
-    self.get_item_input_box().send_keys(Keys.ENTER)
 
-    self.wait_for(lambda: self.assertTrue(
-      self.browser.find_element_by_css_selector('.has-error').is_displayed()
-    ))
-
-    # She starts typing in the input box to clear the error
-    self.get_item_input_box().send_keys('a')
-
-    # She is pleased tot see that the error message disappears
-    self.wait_for(lambda: self.assertFalse(
-      self.browser.find_element_by_css_selector('.has-error').is_displayed()
-    ))
 
 
 

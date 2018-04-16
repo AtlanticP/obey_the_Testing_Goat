@@ -80,4 +80,3 @@ class ItemValidationTest(FucntionalTest):
     self.wait_for(lambda: self.assertFalse(
       self.get_error_element().is_displayed()
     ))
-
