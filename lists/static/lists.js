@@ -1,10 +1,6 @@
-
-QUnit.test("errors should be hidden on keypress", function (assert) {
-	$('input[name="text"]').trigger('keypress');
-	assert.equal($('.has-error').is(':visible'), false);
-});
-
-QUnit.test("errors aren't hidden if there is no keypress", function (assert) {
-	$('.has-error').hide();
-	assert.equal($('.has-error').is(':visible'), true);
-});
+var initialize = function () {
+  $('input[name="text"]').on('keypress', function () {
+    $('.has-error').hide();
+    console.log('Чудо');
+  });
+}

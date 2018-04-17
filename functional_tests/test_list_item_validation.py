@@ -70,13 +70,14 @@ class ItemValidationTest(FucntionalTest):
     self.get_item_input_box().send_keys(Keys.ENTER)
 
     self.wait_for(lambda: self.assertTrue(
-      self.get_error_element().is_displayed()
+      self.browser.find_element_by_css_selector('.has-error').is_displayed()
     ))
 
     # She starts typing in the input box to clear the error
     self.get_item_input_box().send_keys('a')
+    print(self.get_item_input_box().text)
 
     # She is pleased tot see that the error message disappears
     self.wait_for(lambda: self.assertFalse(
-      self.get_error_element().is_displayed()
+      self.browser.find_element_by_css_selector('.has-error').is_displayed()
     ))

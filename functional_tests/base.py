@@ -11,9 +11,10 @@ class FucntionalTest(LiveServerTestCase):
 
     def setUp(self):  
         
-        options = Options()
-        options.add_argument('--headless')
-        self.browser = webdriver.Firefox(firefox_options=options) 
+        # options = Options()
+        # options.add_argument('--headless')
+        # self.browser = webdriver.Firefox(firefox_options=options) 
+        self.browser = webdriver.Firefox()
         staging_server = os.environ.get('STAGING_SERVER')
         
         if staging_server:
