@@ -1,6 +1,7 @@
 from .base import FucntionalTest
 from selenium.webdriver.common.keys import Keys
 
+import time
 
 class ItemValidationTest(FucntionalTest):
 
@@ -74,10 +75,13 @@ class ItemValidationTest(FucntionalTest):
     ))
 
     # She starts typing in the input box to clear the error
-    self.get_item_input_box().send_keys('a')
-    print(self.get_item_input_box().text)
+    # import pdb; pdb.set_trace()
 
-    # She is pleased tot see that the error message disappears
+    time.sleep(5)
+
+    self.get_item_input_box().send_keys('a')
+
+    # She is pleased to see that the error message disappears
     self.wait_for(lambda: self.assertFalse(
       self.browser.find_element_by_css_selector('.has-error').is_displayed()
     ))

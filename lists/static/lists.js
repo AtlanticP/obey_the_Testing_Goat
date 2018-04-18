@@ -3,4 +3,4 @@ var initialize = function () {
     $('.has-error').hide();
     console.log('Чудо');
   });
-}
+};

@@ -19,8 +19,8 @@
       {{ form.text }}
       {% if form.errors %}
         <div class="form-group has-error">
-            <div class="help-block">{{ form.text.errors }}</span>
-          </div>
+          <div class="help-block">{{ form.text.errors }}</div>
+        </div>
       {% endif %}
     </form>
 
@@ -35,7 +35,9 @@
     <!-- Optional JavaScript -->
     <script src="{% static 'lists.js' %}"></script>
     
-    <script>initialize();</script>
+    <script>
+      initialize();
+    </script>
 
   </body>
 </html>
