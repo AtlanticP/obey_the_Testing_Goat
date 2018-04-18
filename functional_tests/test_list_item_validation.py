@@ -75,10 +75,6 @@ class ItemValidationTest(FucntionalTest):
     ))
 
     # She starts typing in the input box to clear the error
-    # import pdb; pdb.set_trace()
-
-    time.sleep(5)
-
     self.get_item_input_box().send_keys('a')
 
     # She is pleased to see that the error message disappears

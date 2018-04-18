@@ -13,35 +13,35 @@
     <form>
       <input name="text" />
       <div class="has-error">Error text</div>
-      <input type="text" name='text' valueo='Вбей'>
     </form>
   </div>
 
-    <form>
-      <div class="has-error">Error text</div>
-      <input type="text" name="text" placeholder="val">
-    </form>
   <script src="../jquery-3.3.1.js"></script>
   <script src="qunit-2.6.0.js"></script>
 
   <script src="../lists.js"></script>
 
+  <!-- QUnit test itself -->
   <script>
-    QUnit.test("errors should be hidden on keypress", function (assert) {
-      initialize();
-      $('input[name="text"').trigger('keypress');
-      assert.equal($('.has-error').is(':visible'), false);
-    });
 
+    //   QUnit.test("errors should be hidden on keypress", function (assert) {
+    //   console.log('test 1');
+    //   $('input[name="text"').trigger('keypress');
+    //   initialize();
+    //   assert.equal($('.has-error').is(':visible'), false,);
+    // });
+    
     QUnit.test("errors aren't hidden if there is no keypress", function (assert) {
+      console.log('test 2');
       initialize();
       assert.equal($('.has-error').is(':visible'), true)
-    } 
-    );
+    });
 
   </script>
+
   <script type="text/javascript">initialize()</script>
 
 </body>
 </html>
+
 
