@@ -24,22 +24,24 @@
   <!-- QUnit test itself -->
   <script>
 
-    //   QUnit.test("errors should be hidden on keypress", function (assert) {
-    //   console.log('test 1');
-    //   $('input[name="text"').trigger('keypress');
-    //   initialize();
-    //   assert.equal($('.has-error').is(':visible'), false,);
-    // });
+    QUnit.test("errors should be hidden on keypress", function (assert) {
+      console.log('test 1');
+      $('input[name="text"').trigger('keypress');
+      $(document).ready(function() {
+        window.Superlists.initialize();
+      });
+      assert.equal($('.has-error').is(':visible'), false,);
+    });
     
     QUnit.test("errors aren't hidden if there is no keypress", function (assert) {
       console.log('test 2');
-      initialize();
+      $(document).ready(function() {
+        window.Superlists.initialize();
+      });
       assert.equal($('.has-error').is(':visible'), true)
     });
 
   </script>
-
-  <script type="text/javascript">initialize()</script>
 
 </body>
 </html>
