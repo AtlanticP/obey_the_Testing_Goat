@@ -1,4 +1,5 @@
 from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
 import os
@@ -7,7 +8,7 @@ import time
 
 MAX_WAIT = 3
 
-class FucntionalTest(LiveServerTestCase):
+class FucntionalTest(StaticLiveServerTestCase):
 
     def setUp(self):  
         
