@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lists',
+    'lists', 'accounts',
 ]
 
 MIDDLEWARE = [
@@ -123,11 +123,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'lists')
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'jarvsev@gmail.com'
+EMAIL_HOST_USER = 'davidovn@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
+AUTH_USER_MODEL = 'accounts.ListUser'
+AUTHENTICATION_BACKENDS = [
+  'accounts.authentication.PasswordlessAuthenticationBackend',
+]
 
 

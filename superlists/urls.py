@@ -7,7 +7,7 @@ from accounts import urls as accounts_urls
 urlpatterns = [
 	path('accounts/', include(accounts_urls)),
 	path('list/', include(lists_urls)),
-    path('', lists_views.home_page, name = 'home'),
+    path('', list_views.home_page, name = 'home'),
 ]
 
 from django.conf import settings
